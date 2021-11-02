@@ -55,8 +55,8 @@ def predict():
         else:
             show_robo = False
 
-        # if model is None:
-        #     model = load_model('C:/Users/User/Desktop/thesis/exoplanet/saved_models/m7.h5')
+        if model is None:
+            model = load_model('C:/Users/User/Desktop/thesis/exoplanet/saved_models/m7.h5')
 
         res = {}
 
@@ -69,10 +69,10 @@ def predict():
                 return render_template('predict.html', post=False, predictions=None, kepid=None, show_robo=show_robo)
 
         prev_kepid = kepid
-        # try:
-        #     res.update(test_kepid(model, kepid, csv_name='C:/Users/User/dev/data/q1_q17_dr24_tce_full.csv'))
-        # except Exception as e:
-        #     print(e)
+        try:
+            res.update(test_kepid(model, kepid, csv_name='C:/Users/User/dev/data/q1_q17_dr24_tce_full.csv'))
+        except Exception as e:
+            print(e)
 
         # try:
         #     res.update(test_kepid(model, kepid, csv_name='C:/Users/User/dev/data/q1_q17_dr24_tce_clean.csv'))
@@ -82,7 +82,7 @@ def predict():
         #     res.update(test_kepid(model, kepid, csv_name='C:/Users/User/dev/data/q1_q17_dr24_tce_clean_test.csv'))
         # except Exception as e:
         #     print(e)
-
+        print("here", res)
         robo = get_robo_pred()
         robo = robo[robo['norm_kepid'] == norm_kepid(kepid)]
         for k, v in res.items():
